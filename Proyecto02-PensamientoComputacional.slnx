@@ -1,1 +1,3 @@
-<Solution />
+<Solution>
+  <Project Path="Juego-Ajedrez/Juego-Ajedrez.csproj" />
+</Solution>
