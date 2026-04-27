@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello, World!");
+﻿Console.WriteLine("Ingrese la contraseña: ");
+
+double contraseña = double.Parse(Console.ReadLine());
