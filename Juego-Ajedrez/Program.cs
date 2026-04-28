@@ -1,38 +1,85 @@
-﻿string contraseña = "E$quizo1984";
-string usuario = "Koalas";
-string usuarioo = "";
-int intentos= 3;
-string contraseñaa = "";
+﻿using System.Text;
+
+string Password = "E$quizo1984";
+string Usuario = "Koalas";
+string UsuarioUsado = "";
+string UserPassword = "";
 bool login=false;
+
+void TClear()
+{
+    Console.ReadKey();
+    Console.Clear();
+}
+
+void MClear()
+{
+    Console.WriteLine();
+    Console.WriteLine("Presione cualquier tecla para continuar...");
+    Console.ReadKey();
+    Console.Clear();
+}
+
+string LeerContra()
+{
+    StringBuilder sb = new StringBuilder();
+    while (true)
+    {
+        ConsoleKeyInfo key = Console.ReadKey(true);
+
+        if (key.Key == ConsoleKey.Enter)
+        {
+            break;
+        }
+
+        if (key.Key == ConsoleKey.Backspace && sb.Length > 0)
+        {
+           
+            sb.Remove(sb.Length - 1, 1);
+            
+            Console.Write("\b \b");
+        }
+        else if (!char.IsControl(key.KeyChar))
+        {
+            sb.Append(key.KeyChar);
+            Console.Write("*");
+        }
+    }
+    return sb.ToString();
+}
 
 for (int i = 0; i < 3; i++)
 { 
-    Console.Write($"Por favor ingrese el usuario, intento {intentos}: ");
-    usuarioo = Console.ReadLine();
-    Console.Write($"Por favor, ingrese la contraseña, intento {intentos}: ");
-    contraseñaa = Console.ReadLine();
+    Console.Write($"Ingrese el usuario: ");
+    UsuarioUsado = Console.ReadLine();
     Console.WriteLine();
-    if (usuarioo == usuario && contraseñaa == contraseña)
+    Console.WriteLine($"Intento {i + 1} de 3");
+    Console.Write($"Ingrese la contraseña: ");
+    UserPassword = LeerContra();
+    Console.WriteLine();
+    Console.WriteLine();
+
+    if (UsuarioUsado == Usuario && UserPassword == Password)
     {
-        login = true; break;
+        login = true; 
+        break;
     }
     else
     {
-        intentos--;
-        Console.Write($"Datos incorrectos. Te quedan {intentos} intento(s).");
-        Console.ReadKey();
-        Console.Clear();
+        Console.Write($"Datos incorrectos. Te quedan {3-i-1} de 3 intentos.");
+       TClear();
     }
  
 }
 Console.Clear();
 if (login == true)
 {
-    Console.WriteLine("El usuario ingresado y la contraseña ingresada son correctos.\n¡Bienvenido!");
+    Console.WriteLine("El usuario y contraseña ingresados son correctos.\n\n¡Bienvenido!");
+    MClear();
 }
 else if (login == false)
 {
 
     Console.WriteLine("Intentos acabados. Acceso denegado.");
-    Console.ReadKey(); return;
+    Console.ReadKey();
 }
