@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Runtime.CompilerServices;
+using System.Text;
 
 string Password = "E$quizo1984";
 string Usuario = "Koalas";
@@ -106,8 +107,59 @@ else if (login == false)
     Console.ResetColor();
     return;
 }
-Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-Console.WriteLine("-_-          ¡Bienvenido al sistema!          -_-");
-Console.WriteLine("-_-             Juego de Ajedrez              -_-");
-Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-Console.WriteLine();
+int opcion = 0;
+bool validacion = true;
+do
+{
+    Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    Console.WriteLine("-_-          ¡Bienvenido al sistema!          -_-");
+    Console.WriteLine("-_-             Juego de Ajedrez              -_-");
+    Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    Console.WriteLine();
+    Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    Console.WriteLine("-_-              JUEGO DE TABLERO             -_-");
+    Console.WriteLine("-_-            1. Iniciar Partida             -_-");
+    Console.WriteLine("-_-            2. Ver reglas del Juego        -_-");
+    Console.WriteLine("-_-            3. Ver puntaje más alto        -_-");
+    Console.WriteLine("-_-            4. Salir                       -_-");
+    Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+    Console.WriteLine();
+    Console.Write("Seleccione una opción: ");
+    validacion = int.TryParse(Console.ReadLine(), out opcion);
+    while (!validacion || opcion < 1 || opcion > 4)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("Opción no válida. Por favor, seleccione una opción del 1 al 4: ");
+        Console.ResetColor();
+        validacion = int.TryParse(Console.ReadLine(), out opcion);
+    }
+    switch (opcion)
+    {
+        case 1:
+            Console.Clear();
+
+            break;
+        case 2:
+            Console.Clear();
+            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+            Console.WriteLine("-_-              Reglas del Juego             -_-");
+            Console.WriteLine("-_-                 De Ajedrez                -_-");
+            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+            Console.Write("Presione cualquier tecla para continuar: ");
+            Console.ReadKey();
+            break;
+        case 3:
+            Console.Clear();
+            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+            Console.WriteLine("-_-              Puntaje más alto             -_-");
+            Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+            Console.Write("Presione cualquier tecla para continuar: ");
+            Console.ReadKey();
+            break;
+        case 4:
+            Console.Clear();
+            Console.WriteLine("Saliendo del programa...");
+            break;
+
+    }
+} while (opcion!=4);
