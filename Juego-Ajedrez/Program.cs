@@ -17,6 +17,31 @@ namespace Juego_Ajedrez
         static int intentos = 3;
         static bool login = false;
 
+        public class Jugador
+        {
+            public string nombre {  get; set; }
+            public string color { get; set; }
+            public bool turno { get; set; }
+            public int puntaje { get; private set; }
+
+            public Jugador(string nombre, string color)
+            {
+                nombre = nombre;
+                puntaje = 0;
+                turno = true;
+            }
+
+            public void SumarPuntos(int puntos)
+            {
+                puntaje += puntos;
+            }
+
+            public void MostrarEstado()
+            {
+                Console.WriteLine($"Jugador: {nombre} | Color: {color}");
+            }
+        }
+
         static void Main(string[] args)
         {
             void TClear()
