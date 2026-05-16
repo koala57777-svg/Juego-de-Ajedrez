@@ -50,6 +50,22 @@ namespace Juego_Ajedrez
             public abstract bool MovimientoValido(int fO, int cO, int FD, int CD, Pieza[,] tablero);
         }
 
+        public class Rey : Pieza
+        {
+            public Rey(string equipo) : base(equipo) => Simbolo = equipo == "J1" ? "S1" : "S2";
+
+            public override bool MovimientoValido(int f0, int c0, int fD, int cD, Pieza[,] tablero)
+            {
+                int dir = Equipo == "J1" ? 1 : -1;
+                if (cD == c0 && fD == f0 + dir && tablero[fD, cD] == null) return true;
+
+                if (Math.Abs(cD - c0) == 1 && fD == f0 + dir && tablero[fD, cD] != null) return true;
+
+                return false;
+            }
+
+        }
+
         static void Main(string[] args)
         {
             void TClear()
