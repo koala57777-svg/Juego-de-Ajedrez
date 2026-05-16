@@ -45,7 +45,7 @@ namespace Juego_Ajedrez
         public abstract class Pieza
         {
             public string Equipo { get; set; }
-            public string Simbolo { get; protected set; }
+            public string Simbolo { get;  set; }
             public Pieza(string equipo) => Equipo = equipo;
             public abstract bool MovimientoValido(int fO, int cO, int FD, int CD, Pieza[,] tablero);
         }
