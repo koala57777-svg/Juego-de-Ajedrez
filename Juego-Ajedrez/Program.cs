@@ -123,6 +123,28 @@ namespace Juego_Ajedrez
                 casillas[6, 2] = new Soldado("J2"); casillas[6, 3] = new Soldado("J2");
                 casillas[6, 4] = new Soldado("J2"); casillas[6, 5] = new Soldado("J2"); 
             }
+
+            public void DibujarTablero()
+            {
+                Console.WriteLine("    0  1  2  3  4  5  6  7");
+                Console.WriteLine("  -------------------------");
+                for (int i = 0; i < 8; i++)
+                {
+                    Console.Write(i + " | ");
+                    for (int z = 0; z < 8; z++)
+                    {
+                        if (casillas[i, z] == null)
+                        {
+                            Console.Write(".  ");
+                        }
+                        else
+                        {
+                            Console.Write(casillas[i, z].Simbolo + " ");
+                        }
+                    }
+                    Console.WriteLine();
+                }
+            }
         }
         static void Main(string[] args)
         {
