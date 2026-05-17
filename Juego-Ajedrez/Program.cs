@@ -107,6 +107,23 @@ namespace Juego_Ajedrez
             }
         }
 
+        public class Tablero
+        {
+            private Pieza[,] casillas = new Pieza[8, 8];
+
+            public Tablero()
+            {
+                casillas[0, 4] = new Rey("J1");
+                casillas[0, 0] = new Torre("J1"); casillas[0, 7] = new Torre("J1");
+                casillas[1, 2] = new Soldado("J1"); casillas[1, 3] = new Soldado("J1");
+                casillas[1, 4] = new Soldado("J1"); casillas[1, 5] = new Soldado("J1");
+
+                casillas[7, 4] = new Rey("J2");
+                casillas[7, 0] = new Torre("J2"); casillas[7, 7] = new Torre("J2");
+                casillas[6, 2] = new Soldado("J2"); casillas[6, 3] = new Soldado("J2");
+                casillas[6, 4] = new Soldado("J2"); casillas[6, 5] = new Soldado("J2"); 
+            }
+        }
         static void Main(string[] args)
         {
             void TClear()
