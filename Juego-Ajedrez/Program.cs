@@ -96,7 +96,7 @@ namespace Juego_Ajedrez
 
                 public override bool MovimientoValido(int fO, int cO, int fD, int cD, Pieza[,] tablero)
                 {
-                    int dir = Equipo == "J1" ? 1 : -1:
+                    int dir = Equipo == "J1" ? 1 : -1;
                     if (cD == cO && fD == fO + dir && tablero[fD, cD] == null)
                     { 
                         return true;
