@@ -21,24 +21,20 @@ namespace Juego_Ajedrez
         {
             public string nombre {  get; set; }
             public string color { get; set; }
-            public bool turno { get; set; }
+            public string equipo { get; set; }
             public int puntaje { get; private set; }
 
-            public Jugador(string nombre1, string color)
+            public Jugador(string nombre1, string color1, string equipo1)
             {
                 this.nombre=nombre1;
                 puntaje = 0;
-                turno = true;
+                this.color = color1;
+                this.equipo = equipo1;
             }
 
             public void SumarPuntos(int puntos)
             {
                 puntaje += puntos;
-            }
-
-            public void MostrarEstado()
-            {
-                Console.WriteLine($"Jugador: {nombre} | Color: {color}");
             }
         }
 
