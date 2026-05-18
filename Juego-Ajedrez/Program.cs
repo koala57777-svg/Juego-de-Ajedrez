@@ -16,19 +16,20 @@ namespace Juego_Ajedrez
         static string UserPassword = "";
         static int intentos = 3;
         static bool login = false;
+        static string recordNombre = "Nadie";
+        static int recorPuntaje = 0;
+        static bool hayRecord = false;
 
         public class Jugador
         {
             public string nombre {  get; set; }
-            public string color { get; set; }
             public string equipo { get; set; }
             public int puntaje { get; private set; }
 
-            public Jugador(string nombre1, string color1, string equipo1)
+            public Jugador(string nombre1, string equipo1)
             {
                 this.nombre=nombre1;
                 puntaje = 0;
-                this.color = color1;
                 this.equipo = equipo1;
             }
 
@@ -345,60 +346,101 @@ namespace Juego_Ajedrez
                 switch (opcion)
                 {
                     case 1:
-                        Console.Clear();
-
                         break;
                     case 2:
-                        Console.Clear();
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine("-_-              Reglas del Juego             -_-");
-                        Console.WriteLine("-_-                 De Ajedrez                -_-");
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine();
-                        Console.WriteLine("-_-_-_-_-_-_-_-  PIEZAS POR JUGADOR  -_-_-_-_-_-_-");
-                        Console.WriteLine("   Rey      ->  x1");
-                        Console.WriteLine("   Torre    ->  x2");
-                        Console.WriteLine("   Soldado  ->  x4");
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine();
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-  MOVIMIENTOS  -_-_-_-_-_-_-_-_-");
-                        Console.WriteLine("   Rey     : Una casilla en cualquier direccion.");
-                        Console.WriteLine("   Torre   : Linea recta, no salta piezas.");
-                        Console.WriteLine("   Soldado : Avanza una, ataca diagonal,");
-                        Console.WriteLine("             no puede retroceder.");
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine();
-                        Console.WriteLine("-_-_-_-_-_-_-_-  ATAQUE Y VICTORIA  -_-_-_-_-_-_-");
-                        Console.WriteLine("   Moverse a casilla rival -> elimina esa pieza.");
-                        Console.WriteLine("   Ganas si: Capturas al Rey rival.");
-                        Console.WriteLine("   Ganas si: Eliminas todas las piezas del rival.");
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine();
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-  PROHIBIDO  -_-_-_-_-_-_-_-_-");
-                        Console.WriteLine("   Salirse del tablero.");
-                        Console.WriteLine("   Mover piezas del rival.");
-                        Console.WriteLine("   Ir a casilla propia ocupada.");
-                        Console.WriteLine("   Torre no puede atravesar piezas.");
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine();
-                        Console.Write("Presione cualquier tecla para continuar: ");
-                        Console.ReadKey();
+                        MostrarReglas();
                         break;
                     case 3:
-                        Console.Clear();
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.WriteLine("-_-              Puntaje más alto             -_-");
-                        Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
-                        Console.Write("Presione cualquier tecla para continuar: ");
-                        Console.ReadKey();
+                        VerPuntajeMasAlto();
                         break;
                     case 4:
                         Console.Clear();
                         Console.WriteLine("Saliendo del programa...");
+                        Console.WriteLine();
                         break;
 
                 }
             } while (opcion != 4);
+            
+            void IniciarPartida()
+            {
+                Console.Clear();
+
+            }
+
+            void MostrarReglas()
+            {
+                Console.Clear();
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                Console.WriteLine("-_-              Reglas del Juego             -_-");
+                Console.WriteLine("-_-                 De Ajedrez                -_-");
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                Console.WriteLine();
+                Console.WriteLine("-_-_-_-_-_-_-_-  PIEZAS POR JUGADOR  -_-_-_-_-_-_-");
+                Console.WriteLine("   Rey      ->  x1");
+                Console.WriteLine("   Torre    ->  x2");
+                Console.WriteLine("   Soldado  ->  x4");
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                Console.WriteLine();
+                Console.WriteLine("-_-_-_-_-_-_-_-_-  MOVIMIENTOS  -_-_-_-_-_-_-_-_-");
+                Console.WriteLine("   Rey     : Una casilla en cualquier direccion.");
+                Console.WriteLine("   Torre   : Linea recta, no salta piezas.");
+                Console.WriteLine("   Soldado : Avanza una, ataca diagonal,");
+                Console.WriteLine("             no puede retroceder.");
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                Console.WriteLine();
+                Console.WriteLine("-_-_-_-_-_-_-_-  ATAQUE Y VICTORIA  -_-_-_-_-_-_-");
+                Console.WriteLine("   Moverse a casilla rival -> elimina esa pieza.");
+                Console.WriteLine("   Ganas si: Capturas al Rey rival.");
+                Console.WriteLine("   Ganas si: Eliminas todas las piezas del rival.");
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                Console.WriteLine();
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-  PROHIBIDO  -_-_-_-_-_-_-_-_-");
+                Console.WriteLine("   Salirse del tablero.");
+                Console.WriteLine("   Mover piezas del rival.");
+                Console.WriteLine("   Ir a casilla propia ocupada.");
+                Console.WriteLine("   Torre no puede atravesar piezas.");
+                Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                Console.WriteLine();
+                Console.Write("Presione cualquier tecla para continuar: ");
+                Console.ReadKey();
+            }
+
+            void VerPuntajeMasAlto()
+            {
+                Console.Clear();
+                if (!hayRecord)
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Aún no se han registrado puntajes");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    Console.WriteLine("-_-              Puntaje más alto             -_-");
+                    Console.WriteLine("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-");
+                    Console.WriteLine();
+                    Console.WriteLine($"Jugador: {recordNombre}");
+                    Console.WriteLine();
+                    Console.WriteLine($"Puntaje: {recorPuntaje}");
+                    Console.WriteLine();
+                    Console.Write("Presione cualquier tecla para continuar: ");
+                    Console.ReadKey();
+                }
+            }
+
+            void ActualizarRecord(Jugador ganador)
+            {
+                if (!hayRecord || ganador.puntaje >recorPuntaje)
+                {
+                    recordNombre = ganador.nombre;
+                    recorPuntaje = ganador.puntaje;
+                    hayRecord = true;
+                }
+            }
         }
     }
 }
