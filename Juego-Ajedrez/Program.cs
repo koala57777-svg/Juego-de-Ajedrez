@@ -182,6 +182,20 @@ namespace Juego_Ajedrez
                 return false;
             }
            
+            public bool ReyCapturado(string Enemigo)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int z = 0; z < 8; z++)
+                    {
+                        if (casillas[i, z] is Rey && casillas[i, z].Equipo == Enemigo)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
         }
         static void Main(string[] args)
         {
