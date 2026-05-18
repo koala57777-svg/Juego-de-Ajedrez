@@ -196,6 +196,22 @@ namespace Juego_Ajedrez
                 }
                 return true;
             }
+
+            public int PiezasFaltantes(string equipo)
+            {
+                int contador = 0;
+                for (int i = 0; i < 8;i++)
+                {
+                    for (int z = 0; z < 8;z++)
+                    {
+                        if (casillas[i, z] != null && casillas[i, z].Equipo == equipo)
+                        {
+                            contador++;
+                        }
+                    }
+                }
+                return contador;
+            }
         }
         static void Main(string[] args)
         {
