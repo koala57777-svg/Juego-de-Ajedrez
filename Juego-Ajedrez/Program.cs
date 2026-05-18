@@ -145,6 +145,43 @@ namespace Juego_Ajedrez
                     Console.WriteLine();
                 }
             }
+
+            public bool Mover(int fO, int cO, int fD, int cD, Jugador actual)
+            {
+                if (fO < 0 || fO > 7 || cO < 0 || cO > 7 || fD < 0 || fD > 7 || cD < 0 || cD > 7)
+                {
+                    return false;
+                }
+
+                Pieza po = casillas[fO, cO];
+                if (po == null || po.Equipo != actual.equipo)
+                {
+                    return false;
+                }
+
+                if (casillas[fD, cD] != null && casillas[fD, cD].Equipo == actual.equipo)
+                {
+                    return false;
+                }
+
+                if (po.MovimientoValido(fO, cO, fD, cD, casillas))
+                {
+                    if (casillas[fD, cD] != null)
+                    {
+                        int puntos = 10;
+                        if (casillas[fD, cD] is Rey)
+                        {
+                            puntos += 50;
+                        }
+                        actual.SumarPuntos(puntos);
+                    }
+                    casillas[fD, cD] = po;
+                    casillas[fO, cO] = null;
+                    return true;
+                }
+                return false;
+            }
+           
         }
         static void Main(string[] args)
         {
